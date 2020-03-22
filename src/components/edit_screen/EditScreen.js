@@ -12,7 +12,7 @@ export class EditScreen extends Component {
         console.log("\tEditScreen constructor");
 
         this.state = {  
-            deleteModalVisible: false
+            deleteModalVisible: true
         }
     }
 
@@ -35,7 +35,8 @@ export class EditScreen extends Component {
                         logo={this.props.logo}
                         changeLogoCallback={this.props.changeLogoCallback}
                         undoCallback={this.props.undoCallback}                                          
-                        canUndo={this.props.canUndo}                         
+                        canUndo={this.props.canUndo}   
+                        canRedo={this.props.canRedo}                      
                     />
                     <TextEditWorkspace
                         logo={this.props.logo} />

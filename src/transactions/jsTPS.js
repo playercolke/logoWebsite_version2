@@ -12,6 +12,13 @@ export class jsTPS_Transaction {
     undoTransaction() {
         console.log("undoTransaction - MISSING IMPLEMENTATION");
     }
+
+    /**
+     * This method is called by jsTPS when a transaction is redone.
+     */
+    redoTransaction() {
+        console.log("redoTransaction - MISSING IMPLEMENTATION");
+    }
 }
 
 export class jsTPS {
@@ -21,6 +28,7 @@ export class jsTPS {
         this.mostRecentTransaction = -1;
         this.performingDo = false;
         this.performingUndo = false;
+        this.performingRedo = false;
     }
 
     isPerformingDo() {
@@ -29,6 +37,10 @@ export class jsTPS {
 
     isPerformingUndo() {
         return this.performingUndo;
+    }
+
+    isPerformingRedo() {
+        return this.performingRedo;
     }
 
     hasTransactionToRedo() {
@@ -80,6 +92,20 @@ export class jsTPS {
             transaction.undoTransaction();
             this.mostRecentTransaction--;
             this.performingUndo = false;
+        }
+    }
+
+    /**
+     * This function gets the most recently transaction that has been undo 
+     * on the TPS stack and redoes it, moving the TPS counter accordingly.
+     */
+    redoTransaction() {
+        if (this.hasTransactionToRedo()) {
+            this.performingRedo = true;
+            let transaction = this.transactions[this.mostRecentTransaction];
+            transaction.redoTransaction();
+            this.mostRecentTransaction++;
+            this.performingRedo = false;
         }
     }
 

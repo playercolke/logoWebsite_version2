@@ -38,7 +38,6 @@ class App extends Component {
 
     // MAKE OUR TRANSACTION PROCESSING SYSTEM
     this.tps = new jsTPS();
-    const x = 5;
 
     // CHECK TO SEE IF THERE IS DATA IN LOCAL STORAGE FOR THIS APP
     let recent_work = localStorage.getItem("recent_work");
@@ -190,6 +189,24 @@ class App extends Component {
    */
   canUndo = () => {
     return this.tps.hasTransactionToUndo();
+  }
+
+  /**
+   * redo - This function let the editscreen redo the new transaction 
+   * of the current one, note that the redo process might not be
+   * function if there is no redo transaction
+   */
+  redo = () => {
+    this.tps.redoTransaction();
+  }
+
+  /**
+   * canRedo - This method lets the user interface know if there are 
+   * any redoable transactions in the transactions stck so that it
+   * can choose to enable ot disable the redo button.
+   */
+  canRedo = () => {
+    return this.tps.hasTransactionToRedo();
   }
 
   // THERE ARE SEVEN FUNCTIONS FOR UPDATING THE App state, TWO OF
@@ -347,7 +364,9 @@ class App extends Component {
           changeLogoCallback={this.buildChangeLogoTransaction}  // TRANSACTION CALLBACK
           undoCallback={this.undo}                        // TRANSACTION CALLBACK                       
           canUndo={this.canUndo}                          // TRANSACTION CALLBACK
-
+          redoCallback={this.redo}
+          canRedo={this.canRedo}
+          
         />;
       default:
         return <div></div>;
