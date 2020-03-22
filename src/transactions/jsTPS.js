@@ -102,7 +102,7 @@ export class jsTPS {
     redoTransaction() {
         if (this.hasTransactionToRedo()) {
             this.performingRedo = true;
-            let transaction = this.transactions[this.mostRecentTransaction];
+            let transaction = this.transactions[this.mostRecentTransaction+1];
             transaction.redoTransaction();
             this.mostRecentTransaction++;
             this.performingRedo = false;

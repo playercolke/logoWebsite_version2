@@ -16,6 +16,10 @@ class TextEditSidebar extends Component {
         this.props.undoCallback();
     }
 
+    handleRedo = () => {
+        this.props.redoCallback();
+    }
+
     handleTextColorChange = (event) => {
         console.log("handleTextColorChange to " + event.target.value);
         this.setState({ textColor: event.target.value }, this.completeUserEditing);

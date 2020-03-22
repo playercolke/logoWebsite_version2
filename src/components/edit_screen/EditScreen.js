@@ -36,6 +36,7 @@ export class EditScreen extends Component {
                         changeLogoCallback={this.props.changeLogoCallback}
                         undoCallback={this.props.undoCallback}                                          
                         canUndo={this.props.canUndo}   
+                        redoCallback={this.props.redoCallback}
                         canRedo={this.props.canRedo}                      
                     />
                     <TextEditWorkspace
