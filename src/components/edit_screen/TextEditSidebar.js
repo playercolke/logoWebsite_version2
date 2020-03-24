@@ -7,7 +7,8 @@ class TextEditSidebar extends Component {
         // WE'LL MANAGE THE UI CONTROL
         // VALUES HERE
         this.state = {
-            textColor : "#FF0000",
+            text: "lol",
+            textColor: "#FF0000",
             fontSize : 11,
             backgroundColor: "#FF0000",
             borderColor: "#FF0000",
@@ -24,6 +25,19 @@ class TextEditSidebar extends Component {
 
     handleRedo = () => {
         this.props.redoCallback();
+    }
+
+    handleTextChange = (event) => {
+        this.setState({ text: event.value,
+            textColor: event.target.value, 
+            fontSize: this.props.logo.fontSize, 
+            backgroundColor: this.props.logo.backgroundColor,
+            borderColor: this.props.logo.borderColor,
+            borderRadius: this.props.logo.borderRadius,
+            borderThickness: this.props.logo.borderThickness,
+            padding: this.props.logo.padding,
+            margin: this.props.logo.margin }, 
+            this.completeUserEditing);
     }
 
     handleTextColorChange = (event) => {
@@ -128,7 +142,7 @@ class TextEditSidebar extends Component {
     completeUserEditing = () => {
         console.log("completeUserEditing");
         console.log("this.state.textColor: " + this.state.textColor);
-        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.props.logo.text, this.state.textColor, this.state.fontSize,
+        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.text, this.state.textColor, this.state.fontSize,
         this.state.backgroundColor, this.state.borderColor, this.state.borderRadius, this.state.borderThickness,
         this.state.padding, this.state.margin);
     }
@@ -147,6 +161,9 @@ class TextEditSidebar extends Component {
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
                         <button className="waves-effect waves-light btn-small">&#9998;</button>
+                        <div id="changeNameModal" className="modal">
+
+                        </div>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={redoClass} onClick={this.handleRedo}>Redo</button>
                     </div>

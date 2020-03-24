@@ -16,12 +16,23 @@ export class EditScreen extends Component {
         }
     }
 
+    handleKeyPress = (event) => {
+        if(event.ctrlKey && event.key === "z") {
+            this.props.undoCallback();
+        }
+        if(event.ctrlKey && event.key === "y") {
+            this.props.redoCallback();
+        }
+    }
+
     componentDidMount = () => {
         console.log("\tEditScreen component did mount");
+        document.addEventListener('keydown', this.handleKeyPress);
     }
 
     componentWillUnmount = () => {
         console.log("\tEditScreen component will unmount");
+        document.addEventListener("keydown", this.handleKeyPress);
     }
 
     render() {
