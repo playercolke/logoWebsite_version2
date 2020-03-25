@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Modal, Button } from 'materialize';
 
 class TextEditSidebar extends Component {
     constructor() {
@@ -43,6 +44,7 @@ class TextEditSidebar extends Component {
     handleTextColorChange = (event) => {
         console.log("handleTextColorChange to " + event.target.value);
         this.setState({ textColor: event.target.value, 
+            text: this.props.logo.text,
             fontSize: this.props.logo.fontSize, 
             backgroundColor: this.props.logo.backgroundColor,
             borderColor: this.props.logo.borderColor,
@@ -56,6 +58,7 @@ class TextEditSidebar extends Component {
     handleFontSizeChange = (event) => {
         console.log("handleFontSizeChangeComplete to " + event.target.value);
         this.setState({ fontSize: event.target.value, 
+            text: this.props.logo.text,
             textColor: this.props.logo.textColor, 
             backgroundColor: this.props.logo.backgroundColor,
             borderColor: this.props.logo.borderColor,
@@ -68,7 +71,8 @@ class TextEditSidebar extends Component {
 
     handleBackgroundColorChange = (event) => {
         console.log("handleBackgroundColorChangeComplete to " + event.target.value);
-        this.setState({ backgroundColor: event.target.value, 
+        this.setState({ backgroundColor: event.target.value,
+            text: this.props.logo.text, 
             textColor: this.props.logo.textColor, 
             fontSize: this.props.logo.fontSize,
             borderColor: this.props.logo.borderColor,
@@ -81,6 +85,7 @@ class TextEditSidebar extends Component {
 
     handleBorderColorChange = (event) => {
         this.setState({borderColor: event.target.value, 
+            text: this.props.logo.text,
             textColor: this.props.logo.textColor, 
             fontSize: this.props.logo.fontSize, 
             backgroundColor: this.props.logo.backgroundColor,
@@ -93,6 +98,7 @@ class TextEditSidebar extends Component {
 
     handleBorderRadiusChange = (event) => {
         this.setState({borderRadius: event.target.value, 
+            text: this.props.logo.text,
             textColor: this.props.logo.textColor, 
             fontSize: this.props.logo.fontSize, 
             backgroundColor: this.props.logo.backgroundColor,
@@ -105,6 +111,7 @@ class TextEditSidebar extends Component {
 
     handleBorderThicknessChange = (event) => {
         this.setState({borderThickness: event.target.value,
+            text: this.props.logo.text,
             borderRadius: this.props.logo.borderRadius, 
             textColor: this.props.logo.textColor, 
             fontSize: this.props.logo.fontSize, 
@@ -117,6 +124,7 @@ class TextEditSidebar extends Component {
 
     handlePaddingChange = (event) => {
         this.setState({padding: event.target.value,
+            text: this.props.logo.text,
             borderThickness: this.props.logo.borderThickness,
             borderRadius: this.props.logo.borderRadius, 
             textColor: this.props.logo.textColor, 
@@ -129,6 +137,7 @@ class TextEditSidebar extends Component {
 
     handleMarginChange = (event) => {
         this.setState({margin: event.target.value,
+            text: this.props.logo.text,
             padding: this.props.logo.padding,
             borderThickness: this.props.logo.borderThickness,
             borderRadius: this.props.logo.borderRadius, 
@@ -160,10 +169,26 @@ class TextEditSidebar extends Component {
             <div className="card-panel col s4">
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
-                        <button className="waves-effect waves-light btn-small">&#9998;</button>
-                        <div id="changeNameModal" className="modal">
-
-                        </div>
+                        <Button className="modal-trigger" href="#renameModal" node="button">&#9998;</Button>
+                        <Modal 
+                            actions={[
+                                <Button flat modal="close" node="button" waves="light">Cancel</Button>,
+                                <Button flat modal="close" node="button" waves="light">Enter</Button>
+                            ]}
+                            bottomSheet={false}
+                            fixedFooter={false}
+                            header="Change Name"
+                            id="renameModal"
+                            options={{
+                                dismissible: true,
+                                endingtop: '20%',
+                                inDuration: 250,
+                                opacity: 0.5,
+                                outDuration: 250,
+                                preventScrooling: true,
+                                startingtop: '2%'
+                            }}>
+                        </Modal>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={redoClass} onClick={this.handleRedo}>Redo</button>
                     </div>
@@ -181,9 +206,9 @@ class TextEditSidebar extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col s4">Font Size:</div>
+                            <div className="col s4">Font Size: </div>
                             <div className="col s8">
-                                <input type="range" min="4" max="144" 
+                                <input type="range" min="4" max="144" name="points"
                                     onChange={this.handleFontSizeChange}
                                     value={this.props.logo.fontSize} />
                             </div>

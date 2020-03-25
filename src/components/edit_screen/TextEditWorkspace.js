@@ -11,15 +11,17 @@ class TextEditWorkspace extends Component {
                 backgroundColor: this.props.logo.backgroundColor,
                 borderColor: this.props.logo.borderColor,
                 borderRadius: this.props.logo.borderRadius + "pt",
-                borderThickness: this.props.logo.borderThickness + "pt",
+                borderWidth: this.props.logo.borderThickness + "pt",
                 padding: this.props.logo.padding + "pt",
                 margin: this.props.logo.margin + "pt"
             }
         }
         return (
-            <div className="col s8"
+            <div className="col s8">
+                    <div id="logo_banner"
                 style={ styles.container }>
-                {this.props.logo.text}
+                    {this.props.logo.text}
+                </div>
             </div>
         )
     }
